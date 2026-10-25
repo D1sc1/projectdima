@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator.Wpf" xmlns:viewmodels="clr-namespace:Calculator.Wpf.ViewModels"
         mc:Ignorable="d"
-        Title="Калькулятор" Height="450" Width="800" MinHeight="450" MinWidth="400" MaxHeight="600" MaxWidth="1200">
+        Title="Калькулятор" Height="500" Width="800" MinHeight="500" MinWidth="400" MaxHeight="600" MaxWidth="1200">
     <Window.DataContext>
         <viewmodels:MainWindowViewModel />
     </Window.DataContext>
@@ -13,7 +13,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="0.5*" />
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -31,6 +31,13 @@
 
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="{Binding DisplayValue}" TextAlignment="Right" FontSize="48"
                    Background="Black" Foreground="Linen" Margin="10,10,10,5" Padding="10"/>
+
+        <Button Grid.Row="1" Grid.Column="0" Content="π" FontSize="36" Margin="10,5,5,5" Click="FunctionButton_Click" />
+        <Button Grid.Row="1" Grid.Column="1" Content="x²" FontSize="36" Margin="5" Click="FunctionButton_Click" />
+        <Button Grid.Row="1" Grid.Column="2" Content="n!" FontSize="36" Margin="5" Click="FunctionButton_Click" />
+
+        <Button Grid.Row="1" Grid.Column="4" Content="←" FontSize="36" Margin="5" Click="BackspaceButton_Click" />
+        <Button Grid.Row="1" Grid.Column="5" Content="±" FontSize="36" Margin="5,5,10,5" Click="ChangeSignButton_Click" />
 
         <Button Grid.Row="2" Grid.Column="0" Content="7" FontSize="36" Margin="10,5,5,5" Click="DigitButton_Click" />
         <Button Grid.Row="2" Grid.Column="1" Content="8" FontSize="36" Margin="5" Click="DigitButton_Click" />
@@ -53,7 +60,8 @@
         <Button Grid.Row="4" Grid.Column="5" Content="/" FontSize="36" Margin="5,5,10,5" Click="OperationButton_Click" />
 
         <Button Grid.Row="5" Grid.Column="0" Content="0" FontSize="36" Margin="10,5,5,10" Click="DigitButton_Click" />
+        <Button Grid.Row="5" Grid.Column="1" Content="," FontSize="36" Margin="5,5,5,10" Click="DecimalPointButton_Click" />
 
-        <Button Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Content="=" FontSize="36" Margin="5,5,10,10" Click="OperationButton_Click" />
+        <Button Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2" Content="=" FontSize="36" Margin="5,5,10,10" Click="EqualButton_Click" />
     </Grid>
 </Window>

@@ -17,7 +17,7 @@ namespace Calculator.Wpf.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Result => _calculatorModel.RegisterX.ToString();
+        public string Result => _calculatorModel.DisplayText;
 
         public void PressDigit(string digitString)
         {
@@ -34,6 +34,36 @@ namespace Calculator.Wpf.ViewModels
         public void PressOperation(string operationCode)
         {
             _calculatorService.PressOperation(_calculatorModel, operationCode);
+            OnPropertyChanged(nameof(Result));
+        }
+
+        public void PressEqual()
+        {
+            _calculatorService.PressEqual(_calculatorModel);
+            OnPropertyChanged(nameof(Result));
+        }
+
+        public void PressDecimalPoint()
+        {
+            _calculatorService.PressDecimalPoint(_calculatorModel);
+            OnPropertyChanged(nameof(Result));
+        }
+
+        public void PressChangeSign()
+        {
+            _calculatorService.PressChangeSign(_calculatorModel);
+            OnPropertyChanged(nameof(Result));
+        }
+
+        public void PressBackspace()
+        {
+            _calculatorService.PressBackspace(_calculatorModel);
+            OnPropertyChanged(nameof(Result));
+        }
+
+        public void PressFunction(string functionCode)
+        {
+            _calculatorService.PressFunction(_calculatorModel, functionCode);
             OnPropertyChanged(nameof(Result));
         }
 

@@ -16,11 +16,21 @@ namespace AlarmClock.Forms
     {
         private const string ImageFolderName = "Images";
 
+        /// <summary>
+        /// На сколько минут откладывается будильник кнопкой "Отложить"
+        /// </summary>
+        private const int SnoozeMinutes = 5;
+
         private string[] _imageFileNames;
 
         private int _imageIndex;
 
         public AlarmState AlarmState { get; set; }
+
+        /// <summary>
+        /// Пользователь отложил будильник
+        /// </summary>
+        public bool IsSnoozed { get; private set; }
 
         public AwakeForm()
         {
@@ -51,9 +61,23 @@ namespace AlarmClock.Forms
             AwakePictureBox.Load(_imageFileNames[_imageIndex]);
         }
 
+        private void SnoozeButton_Click(object sender, EventArgs e)
+        {
+            IsSnoozed = true;
+            Close();
+        }
+
         private void AwakeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            AlarmState.IsAlarmActive = false;
+            if (IsSnoozed)
+            {
+                AlarmState.AlarmTime = DateTime.Now.AddMinutes(SnoozeMinutes);
+            }
+            else
+            {
+                AlarmState.IsAlarmActive = false;
+            }
+
             AlarmState.IsAwakeActivated = false;
         }
     }

@@ -33,6 +33,7 @@
             this.AwakeButton = new System.Windows.Forms.Button();
             this.AwakePictureBox = new System.Windows.Forms.PictureBox();
             this.AwakeTimer = new System.Windows.Forms.Timer(this.components);
+            this.SnoozeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.AwakePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +50,7 @@
             // AwakeButton
             // 
             this.AwakeButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.AwakeButton.Location = new System.Drawing.Point(248, 415);
+            this.AwakeButton.Location = new System.Drawing.Point(180, 415);
             this.AwakeButton.Name = "AwakeButton";
             this.AwakeButton.Size = new System.Drawing.Size(118, 23);
             this.AwakeButton.TabIndex = 1;
@@ -71,11 +72,22 @@
             this.AwakeTimer.Interval = 5000;
             this.AwakeTimer.Tick += new System.EventHandler(this.AwakeTimer_Tick);
             // 
+            // SnoozeButton
+            // 
+            this.SnoozeButton.Location = new System.Drawing.Point(310, 415);
+            this.SnoozeButton.Name = "SnoozeButton";
+            this.SnoozeButton.Size = new System.Drawing.Size(118, 23);
+            this.SnoozeButton.TabIndex = 3;
+            this.SnoozeButton.Text = "Отложить (5 мин)";
+            this.SnoozeButton.UseVisualStyleBackColor = true;
+            this.SnoozeButton.Click += new System.EventHandler(this.SnoozeButton_Click);
+            // 
             // AwakeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 450);
+            this.Controls.Add(this.SnoozeButton);
             this.Controls.Add(this.AwakePictureBox);
             this.Controls.Add(this.AwakeButton);
             this.Controls.Add(this.AlarmMessageLabel);
@@ -96,5 +108,6 @@
         private System.Windows.Forms.Button AwakeButton;
         private System.Windows.Forms.PictureBox AwakePictureBox;
         private System.Windows.Forms.Timer AwakeTimer;
+        private System.Windows.Forms.Button SnoozeButton;
     }
 }

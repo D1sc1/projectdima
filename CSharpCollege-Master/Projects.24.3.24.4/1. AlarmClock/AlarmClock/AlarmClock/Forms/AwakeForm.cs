@@ -22,6 +22,11 @@ namespace AlarmClock.Forms
 
         internal AlarmClockState ClockState { get; set; }
 
+        /// <summary>
+        /// Пользователь отложил будильник
+        /// </summary>
+        public bool IsSnoozed { get; private set; }
+
         public AwakeForm()
         {
             InitializeComponent();
@@ -49,6 +54,12 @@ namespace AlarmClock.Forms
             }
 
             AwakePictureBox.Load(_imageFileNames[_imageIndex]);
+        }
+
+        private void SnoozeButton_Click(object sender, EventArgs e)
+        {
+            IsSnoozed = true;
+            Close();
         }
     }
 }

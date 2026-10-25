@@ -15,6 +15,11 @@ namespace AlarmClock
 {
     public partial class ClockForm : Form
     {
+        /// <summary>
+        /// На сколько минут откладывается будильник кнопкой "Отложить"
+        /// </summary>
+        private const int SnoozeMinutes = 5;
+
         private AlarmClockState _clockState = new AlarmClockState();
 
         public ClockForm()
@@ -51,9 +56,18 @@ namespace AlarmClock
 
         private void AwakeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ((Form)sender).FormClosed -= AwakeForm_FormClosed;
+            var awakeForm = (AwakeForm)sender;
+            awakeForm.FormClosed -= AwakeForm_FormClosed;
 
-            _clockState.IsAlarmActive = false;
+            if (awakeForm.IsSnoozed)
+            {
+                _clockState.AlarmTime = DateTime.Now.AddMinutes(SnoozeMinutes);
+            }
+            else
+            {
+                _clockState.IsAlarmActive = false;
+            }
+
             _clockState.IsAwakeActivated = false;
             UpdateView();
         }

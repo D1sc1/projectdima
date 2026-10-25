@@ -31,7 +31,7 @@ namespace Calculator
 
         private void DisplayValue()
         {
-            DisplayLabel.Text = _calculatorModel.RegisterX.ToString();
+            DisplayLabel.Text = _calculatorModel.DisplayText;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -55,6 +55,30 @@ namespace Calculator
         private void EqualButton_Click(object sender, EventArgs e)
         {
             _service.PressEqual(_calculatorModel);
+            DisplayValue();
+        }
+
+        private void DecimalPointButton_Click(object sender, EventArgs e)
+        {
+            _service.PressDecimalPoint(_calculatorModel);
+            DisplayValue();
+        }
+
+        private void ChangeSignButton_Click(object sender, EventArgs e)
+        {
+            _service.PressChangeSign(_calculatorModel);
+            DisplayValue();
+        }
+
+        private void BackspaceButton_Click(object sender, EventArgs e)
+        {
+            _service.PressBackspace(_calculatorModel);
+            DisplayValue();
+        }
+
+        private void FunctionButton_Click(object sender, EventArgs e)
+        {
+            _service.PressFunction(_calculatorModel, ((Button)sender).Text);
             DisplayValue();
         }
     }

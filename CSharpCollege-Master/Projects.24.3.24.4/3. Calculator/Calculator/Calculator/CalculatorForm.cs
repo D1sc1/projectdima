@@ -32,7 +32,7 @@ namespace Calculator
 
         private void DisplayResult()
         {
-            DisplayLabel.Text = _calculatorModel.RegisterX.ToString();
+            DisplayLabel.Text = _calculatorModel.DisplayText;
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -51,6 +51,37 @@ namespace Calculator
         {
             var operationCode = ((Button)sender).Text;
             _calculatorService.PressOperation(_calculatorModel, operationCode);
+            DisplayResult();
+        }
+
+        private void EqualButton_Click(object sender, EventArgs e)
+        {
+            _calculatorService.PressEqual(_calculatorModel);
+            DisplayResult();
+        }
+
+        private void DecimalPointButton_Click(object sender, EventArgs e)
+        {
+            _calculatorService.PressDecimalPoint(_calculatorModel);
+            DisplayResult();
+        }
+
+        private void ChangeSignButton_Click(object sender, EventArgs e)
+        {
+            _calculatorService.PressChangeSign(_calculatorModel);
+            DisplayResult();
+        }
+
+        private void BackspaceButton_Click(object sender, EventArgs e)
+        {
+            _calculatorService.PressBackspace(_calculatorModel);
+            DisplayResult();
+        }
+
+        private void FunctionButton_Click(object sender, EventArgs e)
+        {
+            var functionCode = ((Button)sender).Text;
+            _calculatorService.PressFunction(_calculatorModel, functionCode);
             DisplayResult();
         }
     }

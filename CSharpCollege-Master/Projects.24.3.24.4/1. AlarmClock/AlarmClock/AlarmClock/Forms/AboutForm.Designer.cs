@@ -62,7 +62,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(231, 63);
             this.label3.TabIndex = 2;
-            this.label3.Text = "(c) Группы 24/3, 24/4";
+            this.label3.Text = "(c) Группы 24/3, 24/4\nMaria";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4

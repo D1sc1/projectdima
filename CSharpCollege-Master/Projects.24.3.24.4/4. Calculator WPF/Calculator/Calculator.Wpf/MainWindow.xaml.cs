@@ -44,5 +44,31 @@ namespace Calculator.Wpf
             var operationCode = ((Button)sender).Content as string;
             ViewModel.PressOperatin(operationCode);
         }
+
+        private void EqualButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.PressEqual();
+        }
+
+        private void DecimalPointButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.PressDecimalPoint();
+        }
+
+        private void ChangeSignButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.PressChangeSign();
+        }
+
+        private void BackspaceButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.PressBackspace();
+        }
+
+        private void FunctionButton_Click(object sender, RoutedEventArgs e)
+        {
+            var functionCode = ((Button)sender).Content as string;
+            ViewModel.PressFunction(functionCode);
+        }
     }
 }
