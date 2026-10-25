@@ -1,0 +1,41 @@
+# Собирает exe всех проектов на Windows и выкладывает их архивом (артефакт CSharpCollege-exe)
+# на странице запуска: вкладка Actions -> нужный запуск -> Artifacts.
+
+name: Сборка exe
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: build-exe-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Сборка всех проектов
+    runs-on: windows-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v5
+
+      # Нужен только веб-проекту на .NET 10 (TicTacToe.Web), остальные собираются MSBuild из Visual Studio
+      - name: Установка .NET SDK 10
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      # Windows PowerShell 5.1, как у студентов, а не pwsh
+      - name: Сборка
+        shell: powershell
+        run: .\build.ps1
+
+      - name: Выгрузка exe
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: CSharpCollege-exe
+          path: out/
+          if-no-files-found: error

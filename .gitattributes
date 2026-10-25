@@ -1,0 +1,2 @@
+# cmd.exe надёжно работает только с CRLF
+*.cmd text eol=crlf
