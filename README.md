@@ -47,6 +47,11 @@
 Exe всех запускаемых проектов (43 программы: WinForms, WPF, консольные и ASP.NET Core) собираются
 автоматически.
 
+Чтобы собирались все проекты, в коде преподавателя исправлена одна ошибка компиляции:
+в `Projects.24.1.24.2.25.1/9. Game DB/EF/.../FifteenGame.Wpf/ViewModels/MainWindowViewModel.cs`
+метод `IsGameOver` возвращает `bool?`, поэтому условие записано как `IsGameOver(...) ?? false`,
+так же как в проекте 10.
+
 ### Скачать с GitHub
 
 При каждом push GitHub Actions собирает проекты на Windows (workflow

@@ -51,7 +51,7 @@ namespace FifteenGame.Wpf.ViewModels
         {
             _model = _service.MakeMove(_model.Id, direction);
             LoadViewModel(_model);
-            if (_service.IsGameOver(_model.Id))
+            if (_service.IsGameOver(_model.Id) ?? false)
             {
                 _service.RemoveGame(_model.Id);
                 gameFinishedAction?.Invoke();
