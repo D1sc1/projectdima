@@ -44,13 +44,23 @@
 
 ## Готовые exe
 
-Exe всех запускаемых проектов (43 программы: WinForms, WPF, консольные и ASP.NET Core) собираются
-автоматически.
+Автоматически собираются exe проектов 1–10 группы 24/3, 24/4 (`CSharpCollege-Master/Projects.24.3.24.4`),
+всего 14 программ:
 
-Чтобы собирались все проекты, в коде преподавателя исправлена одна ошибка компиляции:
-в `Projects.24.1.24.2.25.1/9. Game DB/EF/.../FifteenGame.Wpf/ViewModels/MainWindowViewModel.cs`
-метод `IsGameOver` возвращает `bool?`, поэтому условие записано как `IsGameOver(...) ?? false`,
-так же как в проекте 10.
+| Проект | Exe |
+|---|---|
+| 1. AlarmClock | `AlarmClock` |
+| 2. Drawing | `Drawing`, `DrawingApp` |
+| 3. Calculator | `Calculator` |
+| 4. Calculator WPF | `Calculator.Wpf` |
+| 5. CardFile | `CardFile.Wpf` |
+| 6. GraphEditor | `GraphEditor` |
+| 7. Game WPF | `FifteenGame.Wpf` |
+| 8. Game Web | `TicTacToe.Web` (ASP.NET Core, открывается в браузере) |
+| 9. Game DB | `FifteenGame.Wpf` (ADO.NET), `FifteenGame.Wpf` (EF), `TicTacToe.Wpf` |
+| 10. Game Client-Server | `FifteenGame.Wpf`, `Client` |
+
+Группа 24/1, `Samples.*` и `VTimkin` не собираются.
 
 ### Скачать с GitHub
 
@@ -68,11 +78,12 @@ Exe всех запускаемых проектов (43 программы: Win
 Нужна Visual Studio 2022 (или Build Tools) с нагрузкой «Разработка классических приложений .NET».
 
 1. Дважды щёлкнуть `build.cmd` в корне репозитория (или выполнить `.\build.ps1` в PowerShell).
-2. Программы появятся в папке `out`, по папке на проект, а меню запуска — в `out\run.cmd`.
+2. Программы появятся в папке `out`, по папке на проект (например, `out\3. Calculator\Calculator`),
+   а меню запуска — в `out\run.cmd`.
 
 Параметры `build.ps1`:
 
-- `-Filter Calculator` — собрать только проекты, в пути к которым есть эта строка;
+- `-Filter "9. Game DB"` — собрать только проекты, в пути к которым есть эта строка;
 - `-List` — показать найденные проекты, ничего не собирая.
 
 Веб-проекту `TicTacToe.Web` (.NET 10) нужен [.NET SDK 10](https://dotnet.microsoft.com/download).
@@ -88,6 +99,11 @@ Exe всех запускаемых проектов (43 программы: Win
   (проект `FifteenGame.WebApi` / `WebApi`). Сервер — веб-приложение ASP.NET на .NET Framework,
   exe у него нет: он запускается из Visual Studio (IIS Express).
 - **8. Game Web**, проект `FifteenGame.Web` — тоже ASP.NET на .NET Framework, запускается из Visual Studio.
+
+Кроме выполненных требований, в коде преподавателя исправлена ошибка компиляции, найденная при
+автосборке: в `Projects.24.1.24.2.25.1/9. Game DB/EF/.../FifteenGame.Wpf/ViewModels/MainWindowViewModel.cs`
+метод `IsGameOver` возвращает `bool?`, поэтому условие записано как `IsGameOver(...) ?? false`,
+так же как в проекте 10.
 
 ## Как открыть в Visual Studio
 

@@ -25,13 +25,15 @@ $kindNames = @{
 function Show-Menu {
     $group = $null
     for ($i = 0; $i -lt $projects.Count; $i++) {
+        # Имя вида "9. Game DB\EF\FifteenGame\FifteenGame.Wpf": заголовок - папка проекта, пункт - остальное
         $parts = $projects[$i].Name -split '\\', 2
         if ($parts[0] -ne $group) {
             $group = $parts[0]
             Write-Host ""
             Write-Host $group -ForegroundColor Cyan
         }
-        Write-Host ("{0,4}. {1}{2}" -f ($i + 1), $parts[1], $kindNames[$projects[$i].Kind])
+        $title = if ($parts.Count -gt 1) { $parts[1] } else { $parts[0] }
+        Write-Host ("  [{0,2}] {1}{2}" -f ($i + 1), $title, $kindNames[$projects[$i].Kind])
     }
 }
 

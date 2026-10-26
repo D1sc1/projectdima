@@ -1,5 +1,5 @@
-# Собирает exe всех проектов на Windows и выкладывает их архивом (артефакт CSharpCollege-exe)
-# на странице запуска: вкладка Actions -> нужный запуск -> Artifacts.
+# Собирает exe проектов 1–10 группы 24/3, 24/4 на Windows и выкладывает их архивом
+# (артефакт CSharpCollege-exe) на странице запуска: вкладка Actions -> нужный запуск -> Artifacts.
 
 name: Сборка exe
 
@@ -14,7 +14,7 @@ concurrency:
 
 jobs:
   build:
-    name: Сборка всех проектов
+    name: Сборка проектов 24/3
     runs-on: windows-latest
     timeout-minutes: 60
 

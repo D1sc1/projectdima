@@ -1,11 +1,11 @@
 ﻿<#
 .SYNOPSIS
-    Собирает exe всех проектов из папки CSharpCollege-Master в папку out.
+    Собирает exe проектов 1–10 группы 24/3, 24/4 (CSharpCollege-Master\Projects.24.3.24.4) в папку out.
 
 .DESCRIPTION
-    Находит все решения (.sln, .slnx), берёт из них запускаемые проекты (WinForms, WPF, консольные,
-    ASP.NET Core), восстанавливает NuGet-пакеты и собирает каждый проект в Release в свою папку
-    внутри out. Туда же кладётся меню запуска run.cmd.
+    Находит решения (.sln, .slnx) в папке Projects.24.3.24.4, берёт из них запускаемые проекты
+    (WinForms, WPF, ASP.NET Core), восстанавливает NuGet-пакеты и собирает каждый проект в Release
+    в свою папку внутри out. Туда же кладётся меню запуска run.cmd.
 
     Нужно: Windows и Visual Studio 2022 (или Build Tools) с нагрузкой «Разработка классических
     приложений .NET». Для веб-проекта на .NET 10 (TicTacToe.Web) нужен .NET SDK 10, без него
@@ -21,7 +21,7 @@
     .\build.ps1
 
 .EXAMPLE
-    .\build.ps1 -Filter "Projects.24.3.24.4"
+    .\build.ps1 -Filter "9. Game DB"
 #>
 [CmdletBinding()]
 param(
@@ -33,6 +33,8 @@ $ErrorActionPreference = "Stop"
 
 $repoRoot = $PSScriptRoot
 $sourceRoot = Join-Path $repoRoot "CSharpCollege-Master"
+# Собираются только проекты 1–10 группы 24/3, 24/4; Samples, VTimkin и группа 24/1 не собираются
+$projectsRoot = Join-Path $sourceRoot "Projects.24.3.24.4"
 $outRoot = Join-Path $repoRoot "out"
 $toolsDir = Join-Path $repoRoot ".tools"
 $launcherDir = Join-Path $repoRoot "scripts"
@@ -145,7 +147,7 @@ function Invoke-Tool([string]$exe, [string[]]$arguments) {
 # --- Поиск проектов ---------------------------------------------------------------------------
 
 $projectPaths = New-Object System.Collections.Generic.HashSet[string] ([StringComparer]::OrdinalIgnoreCase)
-$solutions = Get-ChildItem -LiteralPath $sourceRoot -Recurse -File |
+$solutions = Get-ChildItem -LiteralPath $projectsRoot -Recurse -File |
     Where-Object { $_.Extension -eq ".sln" -or $_.Extension -eq ".slnx" }
 
 foreach ($solution in $solutions) {
@@ -167,8 +169,9 @@ $allProjects = @()
 foreach ($path in $projectPaths) {
     $project = Get-Project $path
     if ($project.Kind -eq "library") { continue }
+    if (-not $project.Dir.StartsWith($projectsRoot + $sep, [StringComparison]::OrdinalIgnoreCase)) { continue }
 
-    $name = Get-ShortName (Get-RelativePath $sourceRoot $project.Dir)
+    $name = Get-ShortName (Get-RelativePath $projectsRoot $project.Dir)
     $project | Add-Member Name $name
     $project | Add-Member OutDir (Join-Path $outRoot ($name -replace '\\', $sep))
     $allProjects += $project
